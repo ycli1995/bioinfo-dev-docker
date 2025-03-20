@@ -1,0 +1,19 @@
+ARG FROM_IMAGE=bioinfo_dev
+ARG FROM_VERSION
+
+FROM ycli1995/${FROM_IMAGE}:${FROM_VERSION}
+
+ARG RSTUDIO_VERSION=2022.12.0+353
+
+ENV S6_VERSION=v2.1.0.2
+ENV RSTUDIO_VERSION=${RSTUDIO_VERSION}
+ENV DEFAULT_USER=mydocker
+
+COPY *.sh /install_rstudio/
+
+RUN bash /install_rstudio/install_rstudio.sh
+
+EXPOSE 8787
+
+CMD ["/init"]
+
